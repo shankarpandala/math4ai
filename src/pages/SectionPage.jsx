@@ -12,6 +12,7 @@ import useProgress from '../hooks/useProgress.js'
 const CONTENT_REGISTRY = {
   '02-linear-algebra/c6-decompositions/s3-svd': lazy(() => import('../subjects/02-linear-algebra/c6-decompositions/s3-svd.jsx')),
   '04-probability/c3-continuous-distributions/s1-gaussian': lazy(() => import('../subjects/04-probability/c3-continuous-distributions/s1-gaussian.jsx')),
+  '06-information-theory/c1-entropy/s1-shannon-entropy': lazy(() => import('../subjects/06-information-theory/c1-entropy/s1-shannon-entropy.jsx')),
   '06-information-theory/c3-divergences/s1-kl-divergence': lazy(() => import('../subjects/06-information-theory/c3-divergences/s1-kl-divergence.jsx')),
   '07-optimization/c4-first-order/s1-gradient-descent': lazy(() => import('../subjects/07-optimization/c4-first-order/s1-gradient-descent.jsx')),
   '11-transformers/c1-attention/s1-scaled-dot-product': lazy(() => import('../subjects/11-transformers/c1-attention/s1-scaled-dot-product.jsx')),
