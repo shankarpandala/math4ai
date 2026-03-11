@@ -17,7 +17,11 @@ const CONTENT_REGISTRY = {
   '06-information-theory/c3-divergences/s1-kl-divergence': lazy(() => import('../subjects/06-information-theory/c3-divergences/s1-kl-divergence.jsx')),
   '07-optimization/c4-first-order/s1-gradient-descent': lazy(() => import('../subjects/07-optimization/c4-first-order/s1-gradient-descent.jsx')),
   '07-optimization/c4-first-order/s2-adam': lazy(() => import('../subjects/07-optimization/c4-first-order/s2-adam.jsx')),
+  '02-linear-algebra/c3-inner-products/s3-gram-schmidt': lazy(() => import('../subjects/02-linear-algebra/c3-inner-products/s3-gram-schmidt.jsx')),
+  '04-probability/c5-limit-theorems/s2-clt': lazy(() => import('../subjects/04-probability/c5-limit-theorems/s2-clt.jsx')),
+  '10-neural-networks/c2-backprop/s1-chain-rule': lazy(() => import('../subjects/10-neural-networks/c2-backprop/s1-chain-rule.jsx')),
   '11-transformers/c1-attention/s1-scaled-dot-product': lazy(() => import('../subjects/11-transformers/c1-attention/s1-scaled-dot-product.jsx')),
+  '11-transformers/c1-attention/s2-multihead': lazy(() => import('../subjects/11-transformers/c1-attention/s2-multihead.jsx')),
 }
 
 function CheckIcon() {

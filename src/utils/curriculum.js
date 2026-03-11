@@ -1,36 +1,16 @@
 /**
  * Curriculum navigation utilities for Math4AI.
- * Provides helpers to look up subject/chapter/section metadata and navigate
- * between sections.
- *
- * The curriculum index JSON is expected at /curriculum/index.json relative to
- * the project root.  We use a dynamic import so Vite can bundle it.  If the
- * file is not present we fall back to an empty structure gracefully.
+ * Uses subjects/index.js as the authoritative data source.
  */
+import { CURRICULUM } from '../subjects/index.js';
 
-// Vite static import – adjust the path if your curriculum JSON lives elsewhere
-let curriculumData = { subjects: [] };
-
-try {
-  // This will be resolved at build-time by Vite
-  const mod = await import('../../curriculum/index.json', {
-    assert: { type: 'json' },
-  }).catch(() => ({ default: { subjects: [] } }));
-  curriculumData = mod.default || mod;
-} catch {
-  curriculumData = { subjects: [] };
-}
+const curriculumData = { subjects: CURRICULUM };
 
 /**
  * Get subject metadata by its ID string (e.g. '03-calculus').
  */
 export function getSubject(id) {
-  if (!curriculumData.subjects) return null;
-  return (
-    curriculumData.subjects.find(
-      (s) => s.id === id || String(s.id) === String(id)
-    ) || null
-  );
+  return CURRICULUM.find(s => s.id === id) || null;
 }
 
 /**
@@ -38,12 +18,8 @@ export function getSubject(id) {
  */
 export function getChapter(subjectId, chapterId) {
   const subject = getSubject(subjectId);
-  if (!subject || !subject.chapters) return null;
-  return (
-    subject.chapters.find(
-      (c) => c.id === chapterId || String(c.id) === String(chapterId)
-    ) || null
-  );
+  if (!subject) return null;
+  return (subject.chapters || []).find(c => c.id === chapterId) || null;
 }
 
 /**
@@ -51,12 +27,8 @@ export function getChapter(subjectId, chapterId) {
  */
 export function getSection(subjectId, chapterId, sectionId) {
   const chapter = getChapter(subjectId, chapterId);
-  if (!chapter || !chapter.sections) return null;
-  return (
-    chapter.sections.find(
-      (s) => s.id === sectionId || String(s.id) === String(sectionId)
-    ) || null
-  );
+  if (!chapter) return null;
+  return (chapter.sections || []).find(s => s.id === sectionId) || null;
 }
 
 /**
@@ -64,9 +36,9 @@ export function getSection(subjectId, chapterId, sectionId) {
  */
 function flatSections(subjectId) {
   const subject = getSubject(subjectId);
-  if (!subject || !subject.chapters) return [];
+  if (!subject) return [];
   const flat = [];
-  for (const chapter of subject.chapters) {
+  for (const chapter of subject.chapters || []) {
     for (const section of chapter.sections || []) {
       flat.push({ subjectId, chapterId: chapter.id, sectionId: section.id, ...section });
     }
@@ -79,9 +51,7 @@ function flatSections(subjectId) {
  */
 export function getNextSection(subjectId, chapterId, sectionId) {
   const flat = flatSections(subjectId);
-  const idx = flat.findIndex(
-    (s) => s.chapterId === chapterId && s.sectionId === sectionId
-  );
+  const idx = flat.findIndex(s => s.chapterId === chapterId && s.sectionId === sectionId);
   if (idx === -1 || idx >= flat.length - 1) return null;
   return flat[idx + 1];
 }
@@ -91,9 +61,7 @@ export function getNextSection(subjectId, chapterId, sectionId) {
  */
 export function getPrevSection(subjectId, chapterId, sectionId) {
   const flat = flatSections(subjectId);
-  const idx = flat.findIndex(
-    (s) => s.chapterId === chapterId && s.sectionId === sectionId
-  );
+  const idx = flat.findIndex(s => s.chapterId === chapterId && s.sectionId === sectionId);
   if (idx <= 0) return null;
   return flat[idx - 1];
 }
