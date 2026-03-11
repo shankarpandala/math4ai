@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ReferenceCollectorPrompt>
+  <Meta>
+    <Purpose>Collect authoritative academic references for a mathematics topic</Purpose>
+    <QualityStandard>Peer-reviewed papers, established textbooks, survey papers, curated tutorials</QualityStandard>
+  </Meta>
+
+  <Topic name="{TOPIC_NAME}">
+    <Subject>{SUBJECT}</Subject>
+    <Concepts>{LIST_OF_KEY_CONCEPTS}</Concepts>
+  </Topic>
+
+  <ReferenceCategories>
+    <Category type="foundational_paper">
+      <Instruction>The original paper that introduced or formalized this concept</Instruction>
+    </Category>
+    <Category type="best_textbook">
+      <Instruction>Best graduate-level textbook chapter covering this topic</Instruction>
+    </Category>
+    <Category type="survey_paper">
+      <Instruction>Comprehensive survey of the topic and its applications</Instruction>
+    </Category>
+    <Category type="tutorial">
+      <Instruction>Best accessible tutorial or lecture notes</Instruction>
+    </Category>
+    <Category type="applied_ml_paper">
+      <Instruction>A key ML/AI paper where this math is central to the contribution</Instruction>
+    </Category>
+  </ReferenceCategories>
+
+  <OutputFormat>
+    <Fields>authors, year, title, venue, doi_or_url, abstract_one_sentence, why_essential</Fields>
+    <CitationStyle>APA with hyperlinks</CitationStyle>
+    <MaxPerCategory>5</MaxPerCategory>
+  </OutputFormat>
+</ReferenceCollectorPrompt>

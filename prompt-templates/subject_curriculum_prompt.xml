@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SubjectCurriculumPrompt>
+  <Meta>
+    <Purpose>Generate a comprehensive, research-level chapter and section hierarchy for a mathematics subject</Purpose>
+    <Audience>Advanced students, practitioners, and researchers working in AI/ML/LLMs</Audience>
+    <Depth>Graduate-level textbook with practical AI/ML applications</Depth>
+    <Style>Rigorous yet accessible; visual; research-paper quality with citations</Style>
+  </Meta>
+
+  <Subject name="{SUBJECT_NAME}">
+    <Context>{AI_ML_CONTEXT}</Context>
+    <Prerequisites>{PREREQUISITE_SUBJECTS}</Prerequisites>
+    <LearningObjectives>{OBJECTIVES}</LearningObjectives>
+  </Subject>
+
+  <RecursiveExpansion>
+    <Level1 name="Chapter">
+      <Instruction>List all major chapters. Each chapter is a self-contained conceptual unit.</Instruction>
+      <Fields>title, motivation, ai_ml_relevance, prerequisite_chapters, key_theorems[], key_papers[]</Fields>
+    </Level1>
+    <Level2 name="Section">
+      <Instruction>For each chapter, list all sections. Each section covers one mathematical concept or technique.</Instruction>
+      <Fields>title, intuition, formal_definition, key_results[], visualizations[], difficulty</Fields>
+    </Level2>
+    <Level3 name="SubSection">
+      <Instruction>For each section, list sub-sections covering proofs, examples, and applications.</Instruction>
+      <Fields>title, type[proof|example|application|visualization|exercise], content_sketch</Fields>
+    </Level3>
+  </RecursiveExpansion>
+
+  <OutputFormat>
+    <Schema>JSON with nested chapters → sections → subsections</Schema>
+    <IncludeEstimatedReadingTime>true</IncludeEstimatedReadingTime>
+    <IncludeDifficultyRating>true [beginner|intermediate|advanced|research]</IncludeDifficultyRating>
+    <IncludeMLRelevanceScore>true [0-10]</IncludeMLRelevanceScore>
+  </OutputFormat>
+</SubjectCurriculumPrompt>
