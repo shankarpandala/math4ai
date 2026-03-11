@@ -1,10 +1,21 @@
 import { useParams, Link } from 'react-router-dom'
+import { lazy, Suspense } from 'react'
 import { motion } from 'framer-motion'
 import { getCurriculumById, getChapterById, getSectionById, getAdjacentSections } from '../subjects/index.js'
 import DifficultyBadge from '../components/navigation/DifficultyBadge.jsx'
 import PrevNextNav from '../components/navigation/PrevNextNav.jsx'
 import Breadcrumbs from '../components/layout/Breadcrumbs.jsx'
 import useProgress from '../hooks/useProgress.js'
+
+// Registry of sections that have full content pages written.
+// Add entries here as new section files are created.
+const CONTENT_REGISTRY = {
+  '02-linear-algebra/c6-decompositions/s3-svd': lazy(() => import('../subjects/02-linear-algebra/c6-decompositions/s3-svd.jsx')),
+  '04-probability/c3-continuous-distributions/s1-gaussian': lazy(() => import('../subjects/04-probability/c3-continuous-distributions/s1-gaussian.jsx')),
+  '06-information-theory/c3-divergences/s1-kl-divergence': lazy(() => import('../subjects/06-information-theory/c3-divergences/s1-kl-divergence.jsx')),
+  '07-optimization/c4-first-order/s1-gradient-descent': lazy(() => import('../subjects/07-optimization/c4-first-order/s1-gradient-descent.jsx')),
+  '11-transformers/c1-attention/s1-scaled-dot-product': lazy(() => import('../subjects/11-transformers/c1-attention/s1-scaled-dot-product.jsx')),
+}
 
 function CheckIcon() {
   return (
@@ -30,6 +41,55 @@ function BookIcon() {
       <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
     </svg>
   )
+}
+
+function ComingSoonPlaceholder({ section }) {
+  return (
+    <motion.div
+      className="flex flex-col items-center gap-6 rounded-2xl border border-dashed border-indigo-200 bg-indigo-50/50 px-8 py-16 text-center dark:border-indigo-800/40 dark:bg-indigo-950/10"
+      initial={{ opacity: 0, scale: 0.97 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.4, delay: 0.1 }}
+    >
+      <BookIcon />
+      <div className="space-y-2">
+        <h2 className="text-xl font-bold text-gray-900 dark:text-white">
+          Content Coming Soon
+        </h2>
+        <p className="max-w-md text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
+          The interactive content for{' '}
+          <strong className="font-semibold text-gray-700 dark:text-gray-300">
+            {section.title}
+          </strong>{' '}
+          is being prepared. It will include formal definitions, theorems with proofs,
+          interactive visualizations, and Python examples.
+        </p>
+      </div>
+      <div className="flex flex-wrap justify-center gap-2">
+        {['Theory', 'Proofs', 'Visualizations', 'Exercises'].map((tag) => (
+          <span
+            key={tag}
+            className="rounded-full bg-indigo-100 px-3 py-1 text-xs font-medium text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-400"
+          >
+            {tag}
+          </span>
+        ))}
+      </div>
+    </motion.div>
+  )
+}
+
+function SectionContent({ subjectId, chapterId, sectionId, section }) {
+  const key = `${subjectId}/${chapterId}/${sectionId}`
+  const ContentComponent = CONTENT_REGISTRY[key]
+  if (ContentComponent) {
+    return (
+      <Suspense fallback={<div className="py-16 text-center text-gray-400">Loading content…</div>}>
+        <ContentComponent />
+      </Suspense>
+    )
+  }
+  return <ComingSoonPlaceholder section={section} />
 }
 
 export default function SectionPage() {
@@ -127,39 +187,13 @@ export default function SectionPage() {
 
       {/* Main content area */}
       <div className="mx-auto max-w-3xl px-6 py-12">
-        {/* Content coming soon placeholder */}
-        <motion.div
-          className="flex flex-col items-center gap-6 rounded-2xl border border-dashed border-indigo-200 bg-indigo-50/50 px-8 py-16 text-center dark:border-indigo-800/40 dark:bg-indigo-950/10"
-          initial={{ opacity: 0, scale: 0.97 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.4, delay: 0.1 }}
-        >
-          <BookIcon />
-          <div className="space-y-2">
-            <h2 className="text-xl font-bold text-gray-900 dark:text-white">
-              Content Coming Soon
-            </h2>
-            <p className="max-w-md text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
-              The interactive content for{' '}
-              <strong className="font-semibold text-gray-700 dark:text-gray-300">
-                {section.title}
-              </strong>{' '}
-              is being prepared. It will include formal definitions, theorems with proofs,
-              interactive visualizations, and Python examples.
-            </p>
-          </div>
-
-          <div className="flex flex-wrap justify-center gap-2">
-            {['Theory', 'Proofs', 'Visualizations', 'Exercises'].map((tag) => (
-              <span
-                key={tag}
-                className="rounded-full bg-indigo-100 px-3 py-1 text-xs font-medium text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-400"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-        </motion.div>
+        {/* Dynamically loaded content or "Coming Soon" */}
+        <SectionContent
+          subjectId={subjectId}
+          chapterId={chapterId}
+          sectionId={sectionId}
+          section={section}
+        />
 
         {/* Mark as complete */}
         <div className="mt-8 flex justify-center">
