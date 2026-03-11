@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VisualizationSpecPrompt>
+  <Meta>
+    <Purpose>Generate a complete React/JSX interactive visualization specification</Purpose>
+    <TargetStack>React 19 + Mafs 0.21 + Recharts 3.8 + D3 7.9 + Framer Motion 12 + KaTeX</TargetStack>
+  </Meta>
+
+  <Concept name="{CONCEPT_NAME}">
+    <Subject>{SUBJECT}</Subject>
+    <CoreIdea>{WHAT_TO_DEMONSTRATE}</CoreIdea>
+    <MathematicalObjects>{VECTORS|MATRICES|FUNCTIONS|GRAPHS|DISTRIBUTIONS|...}</MathematicalObjects>
+  </Concept>
+
+  <VisualizationDesign>
+    <Type>interactive|animated|comparative|explorable</Type>
+    <PrimaryComponent>Mafs|Recharts|D3|SVG|Canvas</PrimaryComponent>
+    <Layout>side-by-side|overlay|sequence|dashboard</Layout>
+
+    <InteractiveControls>
+      <Slider parameter="{PARAM}" min="{MIN}" max="{MAX}" step="{STEP}" label="{LABEL}"/>
+      <DraggablePoint id="{ID}" initialPosition="{X,Y}" constraintType="free|line|circle"/>
+      <ToggleButton options="{OPT1, OPT2, OPT3}"/>
+      <AnimationControl autoPlay="{BOOL}" speed="{SPEED}"/>
+    </InteractiveControls>
+
+    <LiveFormulas>
+      <Formula id="{ID}" updates_with="{PARAMETER}" katex="{LATEX_TEMPLATE}"/>
+    </LiveFormulas>
+
+    <Annotations>
+      <Label text="{TEXT}" position="{POSITION}" updates_with="{PARAM}"/>
+      <Arrow from="{FROM}" to="{TO}" label="{LABEL}"/>
+    </Annotations>
+  </VisualizationDesign>
+
+  <OutputSpec>
+    <ComponentName>{PascalCase name}</ComponentName>
+    <Props>{prop definitions}</Props>
+    <StateVariables>{state definitions}</StateVariables>
+    <JSXTemplate>true</JSXTemplate>
+    <TailwindStyling>true</TailwindStyling>
+    <DarkModeSupport>true</DarkModeSupport>
+  </OutputSpec>
+</VisualizationSpecPrompt>

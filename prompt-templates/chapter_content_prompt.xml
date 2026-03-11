@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ChapterContentPrompt>
+  <Meta>
+    <Purpose>Generate deep, research-quality content for a single mathematics chapter section</Purpose>
+    <ContentStyle>Rigorous derivations + visual intuition + computational examples + academic citations</ContentStyle>
+  </Meta>
+
+  <Location>
+    <Subject>{SUBJECT}</Subject>
+    <Chapter>{CHAPTER_TITLE}</Chapter>
+    <Section>{SECTION_TITLE}</Section>
+    <SubSection>{SUBSECTION_TITLE}</SubSection>
+  </Location>
+
+  <Prerequisites>
+    <Concepts>{REQUIRED_CONCEPTS}</Concepts>
+    <Notation>{NOTATION_CONVENTIONS}</Notation>
+  </Prerequisites>
+
+  <ContentSections>
+    <HistoricalContext>
+      <Instruction>Who introduced this concept, when, in what paper/book, and why it was revolutionary</Instruction>
+    </HistoricalContext>
+
+    <Motivation>
+      <Instruction>Real-world AI/ML problem that this math solves. Show the problem BEFORE the math.</Instruction>
+    </Motivation>
+
+    <InformalIntuition>
+      <Instruction>Plain-English explanation with analogies. No formulas yet.</Instruction>
+    </InformalIntuition>
+
+    <FormalDefinition>
+      <Instruction>Precise mathematical definition with full LaTeX notation</Instruction>
+      <Include>axioms, conditions, constraints, notation</Include>
+    </FormalDefinition>
+
+    <Theorems>
+      <Theorem>
+        <Statement>Full formal statement in LaTeX</Statement>
+        <Proof type="full|sketch|visual">Step-by-step derivation</Proof>
+        <Corollaries/>
+      </Theorem>
+    </Theorems>
+
+    <VisualExplanation>
+      <Instruction>Specify the EXACT interactive visualization to build</Instruction>
+      <VisualizationType>animated|interactive|static</VisualizationType>
+      <Component>Mafs|Recharts|D3|SVG|Canvas|Three.js</Component>
+      <InteractiveElements>sliders, draggable_points, animation_controls, parameter_input</InteractiveElements>
+      <WhatToShow>Describe exactly what the visualization should demonstrate</WhatToShow>
+    </VisualExplanation>
+
+    <ComputationalExamples>
+      <Example>
+        <ProblemStatement/>
+        <StepByStepSolution/>
+        <PythonCode language="numpy"/>
+        <VisualOutput/>
+      </Example>
+    </ComputationalExamples>
+
+    <AIMLApplication>
+      <UseCase/>
+      <WhereUsedInPractice>List specific models, papers, frameworks that use this</WhereUsedInPractice>
+      <CodeExample language="pytorch|numpy"/>
+    </AIMLApplication>
+
+    <CommonMistakes>
+      <Instruction>List 3-5 common errors, misconceptions, or pitfalls</Instruction>
+    </CommonMistakes>
+
+    <Exercises>
+      <Exercise difficulty="conceptual|computational|proof|implementation"/>
+    </Exercises>
+
+    <References>
+      <Reference type="foundational_paper|textbook|survey|tutorial">
+        <Authors/><Year/><Title/><Venue/><URL/><WhyImportant/>
+      </Reference>
+    </References>
+  </ContentSections>
+</ChapterContentPrompt>
