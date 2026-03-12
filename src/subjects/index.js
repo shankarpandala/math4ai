@@ -9,80 +9,58 @@ export const CURRICULUM = [
     title: 'Mathematical Foundations',
     icon: '∑',
     colorHex: '#6366f1',
-    description: 'Logic, proofs, real analysis, and the mathematical language underpinning all of ML.',
+    description: 'Logic, proofs, sets, functions, and the real number system — the mathematical language underpinning everything that follows.',
     prerequisites: [],
     mlRelevance: 85,
-    estimatedHours: 40,
+    estimatedHours: 25,
     difficulty: 'beginner',
     chapters: [
       {
         id: 'c1-logic-proofs',
         title: 'Logic & Proofs',
-        description: 'Propositional logic, predicate logic, proof techniques.',
+        description: 'Propositional logic, predicate logic, proof techniques — the language of mathematics.',
         difficulty: 'beginner',
         estimatedMinutes: 240,
         sections: [
-          { id: 's1-propositions', title: 'Propositions & Connectives', difficulty: 'beginner', readingMinutes: 20, description: 'Truth tables, logical operators.' },
-          { id: 's2-proof-techniques', title: 'Proof Techniques', difficulty: 'beginner', readingMinutes: 30, description: 'Direct, contrapositive, contradiction.' },
-          { id: 's3-induction', title: 'Mathematical Induction', difficulty: 'beginner', readingMinutes: 25, description: 'Weak and strong induction.' },
+          { id: 's1-propositions', title: 'Propositions & Connectives', difficulty: 'beginner', readingMinutes: 20, description: 'Truth tables, logical operators.', buildsOn: null },
+          { id: 's2-proof-techniques', title: 'Proof Techniques', difficulty: 'beginner', readingMinutes: 30, description: 'Direct, contrapositive, contradiction.', buildsOn: '01-foundations/c1-logic-proofs/s1-propositions' },
+          { id: 's3-induction', title: 'Mathematical Induction', difficulty: 'beginner', readingMinutes: 25, description: 'Weak and strong induction.', buildsOn: '01-foundations/c1-logic-proofs/s2-proof-techniques' },
         ],
       },
       {
-        id: 'c2-real-numbers',
+        id: 'c2-sets-functions',
+        title: 'Sets & Functions',
+        description: 'Set theory, relations, functions, and cardinality — the building blocks you will use everywhere.',
+        difficulty: 'beginner',
+        estimatedMinutes: 250,
+        sections: [
+          { id: 's1-sets', title: 'Sets & Operations', difficulty: 'beginner', readingMinutes: 20, description: 'Union, intersection, complement, power sets.', buildsOn: '01-foundations/c1-logic-proofs/s3-induction' },
+          { id: 's2-relations', title: 'Relations & Equivalences', difficulty: 'beginner', readingMinutes: 22, description: 'Equivalence relations, partial orders.', buildsOn: '01-foundations/c2-sets-functions/s1-sets' },
+          { id: 's3-functions', title: 'Functions & Mappings', difficulty: 'beginner', readingMinutes: 25, description: 'Injective, surjective, bijective, composition.', buildsOn: '01-foundations/c2-sets-functions/s2-relations' },
+        ],
+      },
+      {
+        id: 'c3-real-numbers',
         title: 'Real Numbers & Sequences',
-        description: 'The real line, completeness, limits, and sequences.',
+        description: 'The real line, completeness, limits, and sequences — the foundation for calculus and analysis.',
         difficulty: 'beginner',
         estimatedMinutes: 300,
         sections: [
-          { id: 's1-real-line', title: 'The Real Number System', difficulty: 'beginner', readingMinutes: 20, description: 'Axioms, order, completeness.' },
-          { id: 's2-sequences', title: 'Sequences & Limits', difficulty: 'beginner', readingMinutes: 30, description: 'Convergence, Cauchy sequences.' },
-          { id: 's3-series', title: 'Series & Convergence', difficulty: 'intermediate', readingMinutes: 35, description: 'Convergence tests, power series.' },
+          { id: 's1-real-line', title: 'The Real Number System', difficulty: 'beginner', readingMinutes: 20, description: 'Axioms, order, completeness.', buildsOn: '01-foundations/c2-sets-functions/s3-functions' },
+          { id: 's2-sequences', title: 'Sequences & Limits', difficulty: 'beginner', readingMinutes: 30, description: 'Convergence, Cauchy sequences.', buildsOn: '01-foundations/c3-real-numbers/s1-real-line' },
+          { id: 's3-series', title: 'Series & Convergence', difficulty: 'intermediate', readingMinutes: 35, description: 'Convergence tests, power series.', buildsOn: '01-foundations/c3-real-numbers/s2-sequences' },
         ],
       },
       {
-        id: 'c3-topology',
+        id: 'c4-topology',
         title: 'Basic Topology',
-        description: 'Open/closed sets, compactness, continuity.',
+        description: 'Open/closed sets, compactness, continuity — the geometric language needed for analysis and optimization.',
         difficulty: 'intermediate',
         estimatedMinutes: 280,
         sections: [
-          { id: 's1-metric-spaces', title: 'Metric Spaces', difficulty: 'intermediate', readingMinutes: 30, description: 'Distance functions, balls, open sets.' },
-          { id: 's2-continuity', title: 'Continuity & Homeomorphisms', difficulty: 'intermediate', readingMinutes: 28, description: 'Continuous maps, topological equivalence.' },
-          { id: 's3-compactness', title: 'Compactness & Connectedness', difficulty: 'intermediate', readingMinutes: 32, description: 'Heine-Borel, connected spaces.' },
-        ],
-      },
-      {
-        id: 'c4-differentiation',
-        title: 'Differentiation',
-        description: 'Derivatives, chain rule, mean value theorem.',
-        difficulty: 'beginner',
-        estimatedMinutes: 260,
-        sections: [
-          { id: 's1-derivatives', title: 'Derivatives & Rules', difficulty: 'beginner', readingMinutes: 22, description: 'Limit definition, product, quotient, chain rules.' },
-          { id: 's2-mvt', title: 'Mean Value Theorem', difficulty: 'beginner', readingMinutes: 20, description: "Rolle's, MVT, L'Hôpital's rule." },
-        ],
-      },
-      {
-        id: 'c5-integration',
-        title: 'Integration',
-        description: 'Riemann integral, fundamental theorem, techniques.',
-        difficulty: 'beginner',
-        estimatedMinutes: 270,
-        sections: [
-          { id: 's1-riemann', title: 'Riemann Integral', difficulty: 'beginner', readingMinutes: 25, description: 'Partitions, Riemann sums, integrability.' },
-          { id: 's2-ftc', title: 'Fundamental Theorem of Calculus', difficulty: 'beginner', readingMinutes: 20, description: 'Both parts, antiderivatives.' },
-        ],
-      },
-      {
-        id: 'c6-multivariable',
-        title: 'Multivariable Analysis',
-        description: 'Partial derivatives, gradients, Jacobians.',
-        difficulty: 'intermediate',
-        estimatedMinutes: 310,
-        sections: [
-          { id: 's1-partial-derivatives', title: 'Partial Derivatives', difficulty: 'intermediate', readingMinutes: 25, description: 'Partial derivatives, gradients.' },
-          { id: 's2-jacobian', title: 'Jacobian & Chain Rule', difficulty: 'intermediate', readingMinutes: 28, description: 'Jacobian matrix, multivariable chain rule.' },
-          { id: 's3-optimization', title: 'Optimization Conditions', difficulty: 'intermediate', readingMinutes: 30, description: 'Critical points, Hessian, saddle points.' },
+          { id: 's1-metric-spaces', title: 'Metric Spaces', difficulty: 'intermediate', readingMinutes: 30, description: 'Distance functions, balls, open sets.', buildsOn: '01-foundations/c3-real-numbers/s3-series' },
+          { id: 's2-continuity', title: 'Continuity & Homeomorphisms', difficulty: 'intermediate', readingMinutes: 28, description: 'Continuous maps, topological equivalence.', buildsOn: '01-foundations/c4-topology/s1-metric-spaces' },
+          { id: 's3-compactness', title: 'Compactness & Connectedness', difficulty: 'intermediate', readingMinutes: 32, description: 'Heine-Borel, connected spaces.', buildsOn: '01-foundations/c4-topology/s2-continuity' },
         ],
       },
     ],
@@ -92,7 +70,7 @@ export const CURRICULUM = [
     title: 'Linear Algebra',
     icon: '⊕',
     colorHex: '#8b5cf6',
-    description: 'Vectors, matrices, transformations, eigenvalues — the core language of ML and neural networks.',
+    description: 'Vectors, matrices, transformations, eigenvalues — the core language of ML and neural networks. Uses the proof techniques and set theory from Mathematical Foundations.',
     prerequisites: ['01-foundations'],
     mlRelevance: 98,
     estimatedHours: 50,
@@ -101,37 +79,37 @@ export const CURRICULUM = [
       {
         id: 'c1-vector-spaces',
         title: 'Vector Spaces',
-        description: 'Vectors, subspaces, basis, dimension.',
+        description: 'Using the real number system and set concepts from Foundations, we define vectors and the spaces they live in.',
         difficulty: 'beginner',
         estimatedMinutes: 280,
         sections: [
-          { id: 's1-vectors', title: 'Vectors & Operations', difficulty: 'beginner', readingMinutes: 20, description: 'Rⁿ, addition, scalar multiplication.' },
-          { id: 's2-subspaces', title: 'Subspaces & Span', difficulty: 'beginner', readingMinutes: 25, description: 'Linear independence, span.' },
-          { id: 's3-basis', title: 'Basis & Dimension', difficulty: 'beginner', readingMinutes: 25, description: 'Basis theorem, coordinates.' },
+          { id: 's1-vectors', title: 'Vectors & Operations', difficulty: 'beginner', readingMinutes: 20, description: 'Rⁿ, addition, scalar multiplication — extending real numbers to multiple dimensions.', buildsOn: '01-foundations/c3-real-numbers/s1-real-line' },
+          { id: 's2-subspaces', title: 'Subspaces & Span', difficulty: 'beginner', readingMinutes: 25, description: 'Linear independence, span.', buildsOn: '02-linear-algebra/c1-vector-spaces/s1-vectors' },
+          { id: 's3-basis', title: 'Basis & Dimension', difficulty: 'beginner', readingMinutes: 25, description: 'Basis theorem, coordinates.', buildsOn: '02-linear-algebra/c1-vector-spaces/s2-subspaces' },
         ],
       },
       {
         id: 'c2-linear-maps',
         title: 'Linear Maps & Matrices',
-        description: 'Matrix multiplication, rank, null space.',
+        description: 'Representing linear functions as matrices — the connection between algebra and geometry.',
         difficulty: 'beginner',
         estimatedMinutes: 300,
         sections: [
-          { id: 's1-matrices', title: 'Matrices & Multiplication', difficulty: 'beginner', readingMinutes: 25, description: 'Matrix ops, composition.' },
-          { id: 's2-rank-nullity', title: 'Rank-Nullity Theorem', difficulty: 'intermediate', readingMinutes: 30, description: 'Row space, column space, null space.' },
-          { id: 's3-systems', title: 'Systems of Equations', difficulty: 'beginner', readingMinutes: 28, description: 'Gaussian elimination, row reduction.' },
+          { id: 's1-matrices', title: 'Matrices & Multiplication', difficulty: 'beginner', readingMinutes: 25, description: 'Matrix ops, composition — functions between vector spaces.', buildsOn: '02-linear-algebra/c1-vector-spaces/s3-basis' },
+          { id: 's2-rank-nullity', title: 'Rank-Nullity Theorem', difficulty: 'intermediate', readingMinutes: 30, description: 'Row space, column space, null space — the fundamental theorem of linear algebra.', buildsOn: '02-linear-algebra/c2-linear-maps/s1-matrices' },
+          { id: 's3-systems', title: 'Systems of Equations', difficulty: 'beginner', readingMinutes: 28, description: 'Gaussian elimination, row reduction.', buildsOn: '02-linear-algebra/c2-linear-maps/s2-rank-nullity' },
         ],
       },
       {
         id: 'c3-inner-products',
         title: 'Inner Products & Norms',
-        description: 'Dot product, orthogonality, projections.',
+        description: 'Introducing geometry into vector spaces — distances, angles, and projections.',
         difficulty: 'intermediate',
         estimatedMinutes: 290,
         sections: [
-          { id: 's1-dot-product', title: 'Dot Product & Norms', difficulty: 'beginner', readingMinutes: 22, description: 'Euclidean inner product, vector norms.' },
-          { id: 's2-orthogonality', title: 'Orthogonality & Projections', difficulty: 'intermediate', readingMinutes: 30, description: 'Orthonormal bases, projections.' },
-          { id: 's3-gram-schmidt', title: 'Gram-Schmidt Process', difficulty: 'intermediate', readingMinutes: 28, description: 'Orthogonalization algorithm.' },
+          { id: 's1-dot-product', title: 'Dot Product & Norms', difficulty: 'beginner', readingMinutes: 22, description: 'Euclidean inner product, vector norms — connecting to metric spaces from Foundations.', buildsOn: '02-linear-algebra/c2-linear-maps/s3-systems' },
+          { id: 's2-orthogonality', title: 'Orthogonality & Projections', difficulty: 'intermediate', readingMinutes: 30, description: 'Orthonormal bases, projections.', buildsOn: '02-linear-algebra/c3-inner-products/s1-dot-product' },
+          { id: 's3-gram-schmidt', title: 'Gram-Schmidt Process', difficulty: 'intermediate', readingMinutes: 28, description: 'Orthogonalization algorithm.', buildsOn: '02-linear-algebra/c3-inner-products/s2-orthogonality' },
         ],
       },
       {
@@ -198,88 +176,93 @@ export const CURRICULUM = [
     title: 'Calculus & Analysis',
     icon: '∫',
     colorHex: '#06b6d4',
-    description: 'Differential and integral calculus, vector calculus, and real analysis for optimization and learning theory.',
+    description: 'Building on the foundations of real numbers and limits, this subject develops derivatives, integrals, and their multivariable extensions — the engine behind optimization and learning.',
     prerequisites: ['01-foundations'],
     mlRelevance: 92,
-    estimatedHours: 45,
+    estimatedHours: 50,
     difficulty: 'beginner',
     chapters: [
       {
         id: 'c1-limits-continuity',
         title: 'Limits & Continuity',
-        description: 'Epsilon-delta, continuity, uniform continuity.',
+        description: 'Building on sequences from Mathematical Foundations, we formalize the epsilon-delta approach to limits and continuity.',
         difficulty: 'beginner',
         estimatedMinutes: 260,
         sections: [
-          { id: 's1-limits', title: 'Limits', difficulty: 'beginner', readingMinutes: 22, description: 'Epsilon-delta definition.' },
-          { id: 's2-continuity', title: 'Continuity', difficulty: 'beginner', readingMinutes: 20, description: 'Continuous functions, IVT.' },
+          { id: 's1-limits', title: 'Limits', difficulty: 'beginner', readingMinutes: 22, description: 'Epsilon-delta definition, extending what you learned about sequence limits.', buildsOn: '01-foundations/c3-real-numbers/s2-sequences' },
+          { id: 's2-continuity', title: 'Continuity', difficulty: 'beginner', readingMinutes: 20, description: 'Continuous functions, IVT — connecting limits to topology.', buildsOn: '03-calculus/c1-limits-continuity/s1-limits' },
         ],
       },
       {
         id: 'c2-differentiation',
         title: 'Single-Variable Differentiation',
-        description: 'Derivative rules, Taylor series, optimization.',
+        description: 'With limits in hand, we define the derivative — the fundamental tool for measuring change and optimizing functions.',
         difficulty: 'beginner',
-        estimatedMinutes: 280,
+        estimatedMinutes: 350,
         sections: [
-          { id: 's1-derivatives', title: 'Derivative Rules', difficulty: 'beginner', readingMinutes: 22, description: 'Product, chain, implicit differentiation.' },
-          { id: 's2-taylor', title: 'Taylor & Maclaurin Series', difficulty: 'intermediate', readingMinutes: 30, description: 'Taylor approximations, remainder.' },
+          { id: 's1-derivatives', title: 'Derivative Rules', difficulty: 'beginner', readingMinutes: 22, description: 'The limit definition of derivatives, product, chain, implicit differentiation.', buildsOn: '03-calculus/c1-limits-continuity/s2-continuity' },
+          { id: 's2-mvt', title: 'Mean Value Theorem', difficulty: 'beginner', readingMinutes: 20, description: "Rolle's theorem, MVT, L'Hopital's rule — key results connecting derivatives to function behavior.", buildsOn: '03-calculus/c2-differentiation/s1-derivatives' },
+          { id: 's3-taylor', title: 'Taylor & Maclaurin Series', difficulty: 'intermediate', readingMinutes: 30, description: 'Taylor approximations and remainder — how derivatives let us approximate any smooth function.', buildsOn: '03-calculus/c2-differentiation/s2-mvt' },
         ],
       },
       {
         id: 'c3-integration',
-        title: 'Integration Techniques',
-        description: 'Integration by parts, substitution, numerical.',
+        title: 'Integration',
+        description: 'The reverse of differentiation — accumulating quantities and computing areas, the foundation for probability and expectation.',
         difficulty: 'intermediate',
-        estimatedMinutes: 300,
+        estimatedMinutes: 370,
         sections: [
-          { id: 's1-techniques', title: 'Integration Techniques', difficulty: 'intermediate', readingMinutes: 30, description: 'Parts, substitution, partial fractions.' },
-          { id: 's2-improper', title: 'Improper Integrals', difficulty: 'intermediate', readingMinutes: 25, description: 'Convergence of improper integrals.' },
+          { id: 's1-riemann', title: 'Riemann Integral', difficulty: 'beginner', readingMinutes: 25, description: 'Partitions, Riemann sums, integrability — building integration from first principles.', buildsOn: '03-calculus/c2-differentiation/s3-taylor' },
+          { id: 's2-ftc', title: 'Fundamental Theorem of Calculus', difficulty: 'beginner', readingMinutes: 20, description: 'Connecting differentiation and integration — the most important theorem in calculus.', buildsOn: '03-calculus/c3-integration/s1-riemann' },
+          { id: 's3-techniques', title: 'Integration Techniques', difficulty: 'intermediate', readingMinutes: 30, description: 'Parts, substitution, partial fractions — practical tools for computing integrals.', buildsOn: '03-calculus/c3-integration/s2-ftc' },
+          { id: 's4-improper', title: 'Improper Integrals', difficulty: 'intermediate', readingMinutes: 25, description: 'Convergence of improper integrals — essential for probability distributions.', buildsOn: '03-calculus/c3-integration/s3-techniques' },
         ],
       },
       {
         id: 'c4-multivariable',
         title: 'Multivariable Calculus',
-        description: 'Partial derivatives, gradients, Hessians.',
+        description: 'Extending derivatives and integrals to multiple variables — the language of gradients, optimization, and machine learning.',
         difficulty: 'intermediate',
-        estimatedMinutes: 320,
+        estimatedMinutes: 400,
         sections: [
-          { id: 's1-gradients', title: 'Gradients & Directional Derivatives', difficulty: 'intermediate', readingMinutes: 28, description: 'Gradient vector, directional derivative.' },
-          { id: 's2-hessian', title: 'Hessian Matrix', difficulty: 'intermediate', readingMinutes: 28, description: 'Second-order conditions.' },
-          { id: 's3-lagrange', title: 'Lagrange Multipliers', difficulty: 'advanced', readingMinutes: 32, description: 'Constrained optimization.' },
+          { id: 's1-partial-derivatives', title: 'Partial Derivatives', difficulty: 'intermediate', readingMinutes: 25, description: 'Extending single-variable derivatives to functions of several variables.', buildsOn: '03-calculus/c3-integration/s4-improper' },
+          { id: 's2-gradients', title: 'Gradients & Directional Derivatives', difficulty: 'intermediate', readingMinutes: 28, description: 'The gradient vector combines partial derivatives into the direction of steepest ascent.', buildsOn: '03-calculus/c4-multivariable/s1-partial-derivatives' },
+          { id: 's3-jacobian', title: 'Jacobian & Chain Rule', difficulty: 'intermediate', readingMinutes: 28, description: 'Jacobian matrix, multivariable chain rule — essential for backpropagation.', buildsOn: '03-calculus/c4-multivariable/s2-gradients' },
+          { id: 's4-hessian', title: 'Hessian Matrix', difficulty: 'intermediate', readingMinutes: 28, description: 'Second-order conditions — understanding curvature for optimization.', buildsOn: '03-calculus/c4-multivariable/s3-jacobian' },
+          { id: 's5-lagrange', title: 'Lagrange Multipliers', difficulty: 'advanced', readingMinutes: 32, description: 'Constrained optimization — optimizing subject to constraints.', buildsOn: '03-calculus/c4-multivariable/s4-hessian' },
         ],
       },
       {
         id: 'c5-vector-calculus',
         title: 'Vector Calculus',
-        description: 'Divergence, curl, Stokes theorem.',
+        description: 'Divergence, curl, and the fundamental theorems — extending calculus to vector fields.',
         difficulty: 'advanced',
         estimatedMinutes: 310,
         sections: [
-          { id: 's1-vector-fields', title: 'Vector Fields', difficulty: 'advanced', readingMinutes: 28, description: 'Divergence, curl, gradient fields.' },
-          { id: 's2-stokes', title: "Stokes' & Divergence Theorems", difficulty: 'advanced', readingMinutes: 35, description: 'Fundamental theorems of calculus.' },
+          { id: 's1-vector-fields', title: 'Vector Fields', difficulty: 'advanced', readingMinutes: 28, description: 'Divergence, curl, gradient fields.', buildsOn: '03-calculus/c4-multivariable/s5-lagrange' },
+          { id: 's2-stokes', title: "Stokes' & Divergence Theorems", difficulty: 'advanced', readingMinutes: 35, description: 'The multivariable generalization of the fundamental theorem.', buildsOn: '03-calculus/c5-vector-calculus/s1-vector-fields' },
         ],
       },
       {
         id: 'c6-measure-theory',
         title: 'Measure Theory Basics',
-        description: 'σ-algebras, Lebesgue integral, almost sure convergence.',
+        description: 'A rigorous foundation for integration and probability — needed for advanced ML theory.',
         difficulty: 'research',
         estimatedMinutes: 350,
         sections: [
-          { id: 's1-sigma-algebras', title: 'σ-Algebras & Measures', difficulty: 'research', readingMinutes: 35, description: 'Measure spaces, Borel sets.' },
-          { id: 's2-lebesgue', title: 'Lebesgue Integration', difficulty: 'research', readingMinutes: 40, description: 'Lebesgue integral, convergence theorems.' },
+          { id: 's1-sigma-algebras', title: 'σ-Algebras & Measures', difficulty: 'research', readingMinutes: 35, description: 'Measure spaces, Borel sets.', buildsOn: '03-calculus/c5-vector-calculus/s2-stokes' },
+          { id: 's2-lebesgue', title: 'Lebesgue Integration', difficulty: 'research', readingMinutes: 40, description: 'Lebesgue integral, convergence theorems.', buildsOn: '03-calculus/c6-measure-theory/s1-sigma-algebras' },
         ],
       },
       {
         id: 'c7-functional-analysis',
         title: 'Functional Analysis Basics',
-        description: 'Banach spaces, Hilbert spaces, operators.',
+        description: 'Infinite-dimensional spaces and operators — the theoretical backbone of kernel methods and RKHS.',
         difficulty: 'research',
         estimatedMinutes: 360,
         sections: [
-          { id: 's1-banach', title: 'Banach & Hilbert Spaces', difficulty: 'research', readingMinutes: 38, description: 'Completeness, inner product spaces.' },
-          { id: 's2-operators', title: 'Linear Operators', difficulty: 'research', readingMinutes: 35, description: 'Bounded operators, spectral theory.' },
+          { id: 's1-banach', title: 'Banach & Hilbert Spaces', difficulty: 'research', readingMinutes: 38, description: 'Completeness, inner product spaces.', buildsOn: '03-calculus/c6-measure-theory/s2-lebesgue' },
+          { id: 's2-operators', title: 'Linear Operators', difficulty: 'research', readingMinutes: 35, description: 'Bounded operators, spectral theory.', buildsOn: '03-calculus/c7-functional-analysis/s1-banach' },
         ],
       },
     ],
@@ -289,7 +272,7 @@ export const CURRICULUM = [
     title: 'Probability Theory',
     icon: 'P',
     colorHex: '#10b981',
-    description: 'Foundations of probability, random variables, distributions, and limit theorems for statistical ML.',
+    description: 'With integration and measure theory from Calculus as our tools, we develop probability — random variables, distributions, and the limit theorems that underpin statistical ML.',
     prerequisites: ['01-foundations', '03-calculus'],
     mlRelevance: 96,
     estimatedHours: 48,
@@ -302,7 +285,7 @@ export const CURRICULUM = [
         difficulty: 'intermediate',
         estimatedMinutes: 260,
         sections: [
-          { id: 's1-axioms', title: 'Kolmogorov Axioms', difficulty: 'intermediate', readingMinutes: 25, description: 'Probability measure, axioms.' },
+          { id: 's1-axioms', title: 'Kolmogorov Axioms', difficulty: 'intermediate', readingMinutes: 25, description: 'Probability measure, axioms — building on set theory and measure concepts.', buildsOn: '03-calculus/c3-integration/s4-improper' },
           { id: 's2-conditional', title: 'Conditional Probability', difficulty: 'intermediate', readingMinutes: 28, description: "Conditioning, Bayes' theorem." },
         ],
       },
@@ -406,7 +389,7 @@ export const CURRICULUM = [
         difficulty: 'intermediate',
         estimatedMinutes: 310,
         sections: [
-          { id: 's1-mle', title: 'Maximum Likelihood Estimation', difficulty: 'intermediate', readingMinutes: 32, description: 'MLE derivation, properties.' },
+          { id: 's1-mle', title: 'Maximum Likelihood Estimation', difficulty: 'intermediate', readingMinutes: 32, description: 'MLE derivation, properties — applying calculus optimization to probability models.', buildsOn: '04-probability/c3-distributions/s3-exponential-family' },
           { id: 's2-map', title: 'MAP Estimation', difficulty: 'intermediate', readingMinutes: 28, description: 'Bayesian point estimation.' },
           { id: 's3-properties', title: 'Estimator Properties', difficulty: 'advanced', readingMinutes: 30, description: 'Bias, variance, consistency, Cramér-Rao.' },
         ],
@@ -498,7 +481,7 @@ export const CURRICULUM = [
         difficulty: 'intermediate',
         estimatedMinutes: 290,
         sections: [
-          { id: 's1-shannon-entropy', title: 'Shannon Entropy', difficulty: 'intermediate', readingMinutes: 28, description: 'Entropy definition, properties.' },
+          { id: 's1-shannon-entropy', title: 'Shannon Entropy', difficulty: 'intermediate', readingMinutes: 28, description: 'Entropy definition, properties — quantifying uncertainty from probability distributions.', buildsOn: '04-probability/c7-information-measures/s2-kl' },
           { id: 's2-differential-entropy', title: 'Differential Entropy', difficulty: 'advanced', readingMinutes: 30, description: 'Continuous entropy, max entropy.' },
         ],
       },
@@ -567,7 +550,7 @@ export const CURRICULUM = [
         difficulty: 'intermediate',
         estimatedMinutes: 310,
         sections: [
-          { id: 's1-convex-sets', title: 'Convex Sets', difficulty: 'intermediate', readingMinutes: 28, description: 'Convex sets, hyperplanes, cones.' },
+          { id: 's1-convex-sets', title: 'Convex Sets', difficulty: 'intermediate', readingMinutes: 28, description: 'Convex sets, hyperplanes, cones — geometric structures for optimization.', buildsOn: '03-calculus/c4-multivariable/s5-lagrange' },
           { id: 's2-convex-functions', title: 'Convex Functions', difficulty: 'intermediate', readingMinutes: 30, description: 'Jensen inequality, quasiconvexity.' },
           { id: 's3-conjugate', title: 'Conjugate Functions', difficulty: 'advanced', readingMinutes: 32, description: 'Legendre-Fenchel transform.' },
         ],
@@ -730,7 +713,7 @@ export const CURRICULUM = [
         difficulty: 'intermediate',
         estimatedMinutes: 310,
         sections: [
-          { id: 's1-architecture', title: 'MLP Architecture', difficulty: 'intermediate', readingMinutes: 28, description: 'Layers, weights, biases.' },
+          { id: 's1-architecture', title: 'MLP Architecture', difficulty: 'intermediate', readingMinutes: 28, description: 'Layers, weights, biases — combining linear algebra and optimization into learning machines.', buildsOn: '07-optimization/c2-unconstrained/s1-gradient-descent' },
           { id: 's2-activations', title: 'Activation Functions', difficulty: 'intermediate', readingMinutes: 25, description: 'ReLU, sigmoid, tanh, GELU.' },
           { id: 's3-uat', title: 'Universal Approximation', difficulty: 'advanced', readingMinutes: 32, description: 'UAT theorem, depth vs. width.' },
         ],
@@ -800,7 +783,7 @@ export const CURRICULUM = [
         difficulty: 'advanced',
         estimatedMinutes: 340,
         sections: [
-          { id: 's1-sdp-attention', title: 'Scaled Dot-Product Attention', difficulty: 'advanced', readingMinutes: 35, description: 'Q, K, V matrices, softmax.' },
+          { id: 's1-sdp-attention', title: 'Scaled Dot-Product Attention', difficulty: 'advanced', readingMinutes: 35, description: 'Q, K, V matrices, softmax — extending neural networks with inner-product-based attention.', buildsOn: '10-neural-networks/c5-training/s3-initialization' },
           { id: 's2-multihead', title: 'Multi-Head Attention', difficulty: 'advanced', readingMinutes: 35, description: 'Multiple attention heads, concatenation.' },
           { id: 's3-cross-attention', title: 'Cross-Attention', difficulty: 'advanced', readingMinutes: 30, description: 'Encoder-decoder attention.' },
         ],
@@ -1120,27 +1103,76 @@ export function getSubjectSectionCount(subjectId) {
 }
 
 /**
- * Get adjacent sections (prev/next) across entire subject.
- * Returns { prev, next } where each has { title, subjectId, chapterId, sectionId } or null.
+ * Get adjacent sections (prev/next) across the entire curriculum.
+ * When a reader finishes the last section of a subject, "next" points to the
+ * first section of the next subject in the learning path, creating a continuous
+ * book-like reading experience.
+ *
+ * Returns { prev, next } where each has { title, subjectId, chapterId, sectionId, subjectTitle? } or null.
+ * subjectTitle is included when crossing a subject boundary so the UI can show a transition.
  */
 export function getAdjacentSections(subjectId, chapterId, sectionId) {
-  const subject = getCurriculumById(subjectId);
-  if (!subject) return { prev: null, next: null };
-
+  // Build a flat list across ALL subjects in curriculum order
   const flat = [];
-  for (const ch of subject.chapters) {
-    for (const sec of ch.sections || []) {
-      flat.push({ title: sec.title, subjectId, chapterId: ch.id, sectionId: sec.id });
+  for (const subject of CURRICULUM) {
+    for (const ch of subject.chapters) {
+      for (const sec of ch.sections || []) {
+        flat.push({
+          title: sec.title,
+          subjectId: subject.id,
+          subjectTitle: subject.title,
+          chapterId: ch.id,
+          sectionId: sec.id,
+        });
+      }
     }
   }
 
   const idx = flat.findIndex(
-    (s) => s.chapterId === chapterId && s.sectionId === sectionId
+    (s) => s.subjectId === subjectId && s.chapterId === chapterId && s.sectionId === sectionId
   );
 
+  if (idx === -1) return { prev: null, next: null };
+
+  const prev = idx > 0 ? flat[idx - 1] : null;
+  const next = idx < flat.length - 1 ? flat[idx + 1] : null;
+
+  // Mark when crossing subject boundaries
+  if (prev && prev.subjectId !== subjectId) {
+    prev.crossesSubject = true;
+  }
+  if (next && next.subjectId !== subjectId) {
+    next.crossesSubject = true;
+  }
+
+  return { prev, next };
+}
+
+/**
+ * Resolve a buildsOn path string (e.g. "01-foundations/c3-real-numbers/s2-sequences")
+ * into a full section reference with title and link info.
+ * Returns { title, subjectId, subjectTitle, chapterId, chapterTitle, sectionId } or null.
+ */
+export function resolveBuildsOn(buildsOnPath) {
+  if (!buildsOnPath) return null;
+  const parts = buildsOnPath.split('/');
+  if (parts.length !== 3) return null;
+
+  const [subjId, chapId, secId] = parts;
+  const subject = getCurriculumById(subjId);
+  if (!subject) return null;
+  const chapter = subject.chapters.find((c) => c.id === chapId);
+  if (!chapter) return null;
+  const section = chapter.sections?.find((s) => s.id === secId);
+  if (!section) return null;
+
   return {
-    prev: idx > 0 ? flat[idx - 1] : null,
-    next: idx < flat.length - 1 ? flat[idx + 1] : null,
+    title: section.title,
+    subjectId: subjId,
+    subjectTitle: subject.title,
+    chapterId: chapId,
+    chapterTitle: chapter.title,
+    sectionId: secId,
   };
 }
 
