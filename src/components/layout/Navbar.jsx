@@ -157,8 +157,18 @@ export default function Navbar({ onToggleSidebar, sidebarOpen }) {
             href="https://shankarpandala.github.io/"
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-md p-2 text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
-            aria-label="Author's portfolio"
+            className="hidden sm:inline-flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-sm font-medium text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 transition-colors"
+            aria-label="Shankar Pandala's portfolio"
+          >
+            <UserIcon />
+            <span>Shankar Pandala</span>
+          </a>
+          <a
+            href="https://shankarpandala.github.io/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="sm:hidden rounded-md p-2 text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
+            aria-label="Shankar Pandala's portfolio"
           >
             <UserIcon />
           </a>
