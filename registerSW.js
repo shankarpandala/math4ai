@@ -1,0 +1,1 @@
+if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('/math4ai/sw.js', { scope: '/math4ai/' })})}
