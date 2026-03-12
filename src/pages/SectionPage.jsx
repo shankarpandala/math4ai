@@ -10,18 +10,40 @@ import useProgress from '../hooks/useProgress.js'
 // Registry of sections that have full content pages written.
 // Add entries here as new section files are created.
 const CONTENT_REGISTRY = {
+  // Linear Algebra
+  '02-linear-algebra/c3-inner-products/s3-gram-schmidt': lazy(() => import('../subjects/02-linear-algebra/c3-inner-products/s3-gram-schmidt.jsx')),
   '02-linear-algebra/c5-eigentheory/s1-eigenvalues': lazy(() => import('../subjects/02-linear-algebra/c5-eigentheory/s1-eigenvalues.jsx')),
   '02-linear-algebra/c6-decompositions/s3-svd': lazy(() => import('../subjects/02-linear-algebra/c6-decompositions/s3-svd.jsx')),
+  // Probability
   '04-probability/c3-continuous-distributions/s1-gaussian': lazy(() => import('../subjects/04-probability/c3-continuous-distributions/s1-gaussian.jsx')),
+  '04-probability/c5-limit-theorems/s2-clt': lazy(() => import('../subjects/04-probability/c5-limit-theorems/s2-clt.jsx')),
+  // Information Theory
   '06-information-theory/c1-entropy/s1-shannon-entropy': lazy(() => import('../subjects/06-information-theory/c1-entropy/s1-shannon-entropy.jsx')),
   '06-information-theory/c3-divergences/s1-kl-divergence': lazy(() => import('../subjects/06-information-theory/c3-divergences/s1-kl-divergence.jsx')),
+  // Optimization
   '07-optimization/c4-first-order/s1-gradient-descent': lazy(() => import('../subjects/07-optimization/c4-first-order/s1-gradient-descent.jsx')),
   '07-optimization/c4-first-order/s2-adam': lazy(() => import('../subjects/07-optimization/c4-first-order/s2-adam.jsx')),
-  '02-linear-algebra/c3-inner-products/s3-gram-schmidt': lazy(() => import('../subjects/02-linear-algebra/c3-inner-products/s3-gram-schmidt.jsx')),
-  '04-probability/c5-limit-theorems/s2-clt': lazy(() => import('../subjects/04-probability/c5-limit-theorems/s2-clt.jsx')),
+  // Neural Networks
   '10-neural-networks/c2-backprop/s1-chain-rule': lazy(() => import('../subjects/10-neural-networks/c2-backprop/s1-chain-rule.jsx')),
+  // Transformers
   '11-transformers/c1-attention/s1-scaled-dot-product': lazy(() => import('../subjects/11-transformers/c1-attention/s1-scaled-dot-product.jsx')),
   '11-transformers/c1-attention/s2-multihead': lazy(() => import('../subjects/11-transformers/c1-attention/s2-multihead.jsx')),
+  // Mathematical Foundations (new)
+  '01-foundations/c1-logic-proofs/s1-propositions': lazy(() => import('../subjects/01-foundations/c1-logic-proofs/s1-propositions.jsx')),
+  // Calculus (new)
+  '03-calculus/c2-differentiation/s1-derivatives': lazy(() => import('../subjects/03-calculus/c2-differentiation/s1-derivatives.jsx')),
+  // Statistics (new)
+  '05-statistics/c1-estimation/s1-mle': lazy(() => import('../subjects/05-statistics/c1-estimation/s1-mle.jsx')),
+  // Numerical Methods (new)
+  '08-numerical-methods/c1-numerical-linalg/s1-direct-solvers': lazy(() => import('../subjects/08-numerical-methods/c1-numerical-linalg/s1-direct-solvers.jsx')),
+  // Graph Theory (new)
+  '09-graph-theory/c1-graph-basics/s1-definitions': lazy(() => import('../subjects/09-graph-theory/c1-graph-basics/s1-definitions.jsx')),
+  // Vector Search (new)
+  '12-vector-search/c1-embedding-spaces/s1-word2vec': lazy(() => import('../subjects/12-vector-search/c1-embedding-spaces/s1-word2vec.jsx')),
+  // Reinforcement Learning (new)
+  '13-reinforcement-learning/c1-mdp/s1-mdp-framework': lazy(() => import('../subjects/13-reinforcement-learning/c1-mdp/s1-mdp-framework.jsx')),
+  // Generative Models (new)
+  '14-generative-models/c1-vae/s1-elbo': lazy(() => import('../subjects/14-generative-models/c1-vae/s1-elbo.jsx')),
 }
 
 function CheckIcon() {
