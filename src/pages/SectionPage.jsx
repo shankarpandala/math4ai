@@ -1,7 +1,7 @@
 import { useParams, Link } from 'react-router-dom'
 import { lazy, Suspense } from 'react'
 import { motion } from 'framer-motion'
-import { getCurriculumById, getChapterById, getSectionById, getAdjacentSections } from '../subjects/index.js'
+import { getCurriculumById, getChapterById, getSectionById, getAdjacentSections, resolveBuildsOn } from '../subjects/index.js'
 import DifficultyBadge from '../components/navigation/DifficultyBadge.jsx'
 import PrevNextNav from '../components/navigation/PrevNextNav.jsx'
 import Breadcrumbs from '../components/layout/Breadcrumbs.jsx'
@@ -10,22 +10,16 @@ import useProgress from '../hooks/useProgress.js'
 // Registry of sections that have full content pages written.
 // Auto-generated from all existing section JSX files across all 15 subjects.
 const CONTENT_REGISTRY = {
-  // 01-foundations
+  // 01-foundations (restructured: pure foundations only, no calculus topics)
   '01-foundations/c1-logic-proofs/s1-propositions': lazy(() => import('../subjects/01-foundations/c1-logic-proofs/s1-propositions.jsx')),
   '01-foundations/c1-logic-proofs/s2-proof-techniques': lazy(() => import('../subjects/01-foundations/c1-logic-proofs/s2-proof-techniques.jsx')),
   '01-foundations/c1-logic-proofs/s3-induction': lazy(() => import('../subjects/01-foundations/c1-logic-proofs/s3-induction.jsx')),
-  '01-foundations/c2-real-numbers/s1-real-line': lazy(() => import('../subjects/01-foundations/c2-real-numbers/s1-real-line.jsx')),
-  '01-foundations/c2-real-numbers/s2-sequences': lazy(() => import('../subjects/01-foundations/c2-real-numbers/s2-sequences.jsx')),
-  '01-foundations/c2-real-numbers/s3-series': lazy(() => import('../subjects/01-foundations/c2-real-numbers/s3-series.jsx')),
-  '01-foundations/c3-topology/s1-metric-spaces': lazy(() => import('../subjects/01-foundations/c3-topology/s1-metric-spaces.jsx')),
-  '01-foundations/c3-topology/s2-continuity': lazy(() => import('../subjects/01-foundations/c3-topology/s2-continuity.jsx')),
-  '01-foundations/c3-topology/s3-compactness': lazy(() => import('../subjects/01-foundations/c3-topology/s3-compactness.jsx')),
-  '01-foundations/c4-differentiation/s1-derivatives': lazy(() => import('../subjects/01-foundations/c4-differentiation/s1-derivatives.jsx')),
-  '01-foundations/c5-integration/s1-riemann': lazy(() => import('../subjects/01-foundations/c5-integration/s1-riemann.jsx')),
-  '01-foundations/c5-integration/s2-ftc': lazy(() => import('../subjects/01-foundations/c5-integration/s2-ftc.jsx')),
-  '01-foundations/c6-multivariable/s1-partial-derivatives': lazy(() => import('../subjects/01-foundations/c6-multivariable/s1-partial-derivatives.jsx')),
-  '01-foundations/c6-multivariable/s2-jacobian': lazy(() => import('../subjects/01-foundations/c6-multivariable/s2-jacobian.jsx')),
-  '01-foundations/c6-multivariable/s3-optimization': lazy(() => import('../subjects/01-foundations/c6-multivariable/s3-optimization.jsx')),
+  '01-foundations/c3-real-numbers/s1-real-line': lazy(() => import('../subjects/01-foundations/c2-real-numbers/s1-real-line.jsx')),
+  '01-foundations/c3-real-numbers/s2-sequences': lazy(() => import('../subjects/01-foundations/c2-real-numbers/s2-sequences.jsx')),
+  '01-foundations/c3-real-numbers/s3-series': lazy(() => import('../subjects/01-foundations/c2-real-numbers/s3-series.jsx')),
+  '01-foundations/c4-topology/s1-metric-spaces': lazy(() => import('../subjects/01-foundations/c3-topology/s1-metric-spaces.jsx')),
+  '01-foundations/c4-topology/s2-continuity': lazy(() => import('../subjects/01-foundations/c3-topology/s2-continuity.jsx')),
+  '01-foundations/c4-topology/s3-compactness': lazy(() => import('../subjects/01-foundations/c3-topology/s3-compactness.jsx')),
   // 02-linear-algebra
   '02-linear-algebra/c1-vector-spaces/s1-vectors': lazy(() => import('../subjects/02-linear-algebra/c1-vector-spaces/s1-vectors.jsx')),
   '02-linear-algebra/c1-vector-spaces/s2-subspaces': lazy(() => import('../subjects/02-linear-algebra/c1-vector-spaces/s2-subspaces.jsx')),
@@ -47,16 +41,21 @@ const CONTENT_REGISTRY = {
   '02-linear-algebra/c7-pca/s2-pca': lazy(() => import('../subjects/02-linear-algebra/c7-pca/s2-pca.jsx')),
   '02-linear-algebra/c8-special-matrices/s1-psd': lazy(() => import('../subjects/02-linear-algebra/c8-special-matrices/s1-psd.jsx')),
   '02-linear-algebra/c8-special-matrices/s2-structured': lazy(() => import('../subjects/02-linear-algebra/c8-special-matrices/s2-structured.jsx')),
-  // 03-calculus
+  // 03-calculus (now includes content migrated from foundations c4/c5/c6)
   '03-calculus/c1-limits-continuity/s1-limits': lazy(() => import('../subjects/03-calculus/c1-limits-continuity/s1-limits.jsx')),
   '03-calculus/c1-limits-continuity/s2-continuity': lazy(() => import('../subjects/03-calculus/c1-limits-continuity/s2-continuity.jsx')),
   '03-calculus/c2-differentiation/s1-derivatives': lazy(() => import('../subjects/03-calculus/c2-differentiation/s1-derivatives.jsx')),
-  '03-calculus/c2-differentiation/s2-taylor': lazy(() => import('../subjects/03-calculus/c2-differentiation/s2-taylor.jsx')),
-  '03-calculus/c3-integration/s1-techniques': lazy(() => import('../subjects/03-calculus/c3-integration/s1-techniques.jsx')),
-  '03-calculus/c3-integration/s2-improper': lazy(() => import('../subjects/03-calculus/c3-integration/s2-improper.jsx')),
-  '03-calculus/c4-multivariable/s1-gradients': lazy(() => import('../subjects/03-calculus/c4-multivariable/s1-gradients.jsx')),
-  '03-calculus/c4-multivariable/s2-hessian': lazy(() => import('../subjects/03-calculus/c4-multivariable/s2-hessian.jsx')),
-  '03-calculus/c4-multivariable/s3-lagrange': lazy(() => import('../subjects/03-calculus/c4-multivariable/s3-lagrange.jsx')),
+  '03-calculus/c2-differentiation/s2-mvt': lazy(() => import('../subjects/01-foundations/c4-differentiation/s1-derivatives.jsx')),
+  '03-calculus/c2-differentiation/s3-taylor': lazy(() => import('../subjects/03-calculus/c2-differentiation/s2-taylor.jsx')),
+  '03-calculus/c3-integration/s1-riemann': lazy(() => import('../subjects/01-foundations/c5-integration/s1-riemann.jsx')),
+  '03-calculus/c3-integration/s2-ftc': lazy(() => import('../subjects/01-foundations/c5-integration/s2-ftc.jsx')),
+  '03-calculus/c3-integration/s3-techniques': lazy(() => import('../subjects/03-calculus/c3-integration/s1-techniques.jsx')),
+  '03-calculus/c3-integration/s4-improper': lazy(() => import('../subjects/03-calculus/c3-integration/s2-improper.jsx')),
+  '03-calculus/c4-multivariable/s1-partial-derivatives': lazy(() => import('../subjects/01-foundations/c6-multivariable/s1-partial-derivatives.jsx')),
+  '03-calculus/c4-multivariable/s2-gradients': lazy(() => import('../subjects/03-calculus/c4-multivariable/s1-gradients.jsx')),
+  '03-calculus/c4-multivariable/s3-jacobian': lazy(() => import('../subjects/01-foundations/c6-multivariable/s2-jacobian.jsx')),
+  '03-calculus/c4-multivariable/s4-hessian': lazy(() => import('../subjects/03-calculus/c4-multivariable/s2-hessian.jsx')),
+  '03-calculus/c4-multivariable/s5-lagrange': lazy(() => import('../subjects/03-calculus/c4-multivariable/s3-lagrange.jsx')),
   '03-calculus/c5-vector-calculus/s1-vector-fields': lazy(() => import('../subjects/03-calculus/c5-vector-calculus/s1-vector-fields.jsx')),
   '03-calculus/c6-measure-theory/s1-sigma-algebras': lazy(() => import('../subjects/03-calculus/c6-measure-theory/s1-sigma-algebras.jsx')),
   '03-calculus/c6-measure-theory/s2-lebesgue': lazy(() => import('../subjects/03-calculus/c6-measure-theory/s2-lebesgue.jsx')),
@@ -263,6 +262,38 @@ function ComingSoonPlaceholder({ section }) {
   )
 }
 
+function PrerequisiteBanner({ section, subjectId, chapterId }) {
+  if (!section?.buildsOn) return null;
+  const prereq = resolveBuildsOn(section.buildsOn);
+  if (!prereq) return null;
+
+  const isSameSubject = prereq.subjectId === subjectId;
+  const href = `/subjects/${prereq.subjectId}/${prereq.chapterId}/${prereq.sectionId}`;
+
+  return (
+    <div className="mb-6 flex items-start gap-3 rounded-lg border border-amber-200 bg-amber-50/60 px-4 py-3 dark:border-amber-800/40 dark:bg-amber-950/20">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mt-0.5 shrink-0 text-amber-600 dark:text-amber-400" aria-hidden="true">
+        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+      </svg>
+      <div className="text-sm leading-relaxed text-amber-900 dark:text-amber-200">
+        <span className="font-medium">Builds on: </span>
+        <Link
+          to={href}
+          className="underline decoration-amber-400/60 underline-offset-2 hover:decoration-amber-600 dark:decoration-amber-600/60 dark:hover:decoration-amber-400 transition-colors"
+        >
+          {prereq.title}
+        </Link>
+        {!isSameSubject && (
+          <span className="ml-1 text-amber-700 dark:text-amber-400/80">
+            ({prereq.subjectTitle})
+          </span>
+        )}
+      </div>
+    </div>
+  );
+}
+
 function SectionContent({ subjectId, chapterId, sectionId, section }) {
   const key = `${subjectId}/${chapterId}/${sectionId}`
   const ContentComponent = CONTENT_REGISTRY[key]
@@ -371,6 +402,9 @@ export default function SectionPage() {
 
       {/* Main content area */}
       <div className="mx-auto max-w-3xl px-6 py-12">
+        {/* Prerequisite context for progressive learning */}
+        <PrerequisiteBanner section={section} subjectId={subjectId} chapterId={chapterId} />
+
         {/* Dynamically loaded content or "Coming Soon" */}
         <SectionContent
           subjectId={subjectId}
