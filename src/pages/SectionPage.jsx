@@ -44,6 +44,8 @@ const CONTENT_REGISTRY = {
   '13-reinforcement-learning/c1-mdp/s1-mdp-framework': lazy(() => import('../subjects/13-reinforcement-learning/c1-mdp/s1-mdp-framework.jsx')),
   // Generative Models (new)
   '14-generative-models/c1-vae/s1-elbo': lazy(() => import('../subjects/14-generative-models/c1-vae/s1-elbo.jsx')),
+  // Bayesian ML (new)
+  '15-bayesian/c1-gaussian-processes/s1-gp-prior': lazy(() => import('../subjects/15-bayesian/c1-gaussian-processes/s1-gp-prior.jsx')),
 }
 
 function CheckIcon() {
