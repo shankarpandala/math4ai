@@ -300,9 +300,9 @@ export default function PPOActorCritic() {
 
       <WarningBlock title="PPO Is On-Policy: Sample Efficiency Limitation">
         <p>
-          PPO collects rollouts with $\pi_{\theta_{old}}$, updates parameters, then{' '}
+          PPO collects rollouts with <InlineMath math="\pi_{\theta_{old}}" />, updates parameters, then{' '}
           <strong>discards all collected data</strong> and repeats. This is fundamentally
-          sample inefficient: each transition is used for at most $K \approx 10$ gradient
+          sample inefficient: each transition is used for at most <InlineMath math="K \approx 10" /> gradient
           updates before being thrown away. Off-policy algorithms (SAC, TD3) reuse data
           from a replay buffer, achieving 10-100× better sample efficiency on continuous
           control benchmarks. For environments where simulation is cheap (Atari, MuJoCo),

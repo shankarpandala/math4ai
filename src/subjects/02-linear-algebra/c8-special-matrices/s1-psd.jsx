@@ -246,7 +246,7 @@ export default function PositiveSemidefiniteMatrices() {
       <WarningBlock title="PSD in Machine Learning Practice">
         <ul className="space-y-2 text-sm">
           <li><strong>Kernel matrices must be PSD.</strong> The SVM dual, Gaussian process covariance, and kernel regression all require the kernel matrix $K_{ij} = k(x_i, x_j)$ to be PSD. A non-PSD kernel function leads to indefinite quadratic programs that may have no solution. Verify kernels using Mercer's theorem.</li>
-          <li className="mt-2"><strong>Sample covariance can be near-singular.</strong> When $n < d$ (fewer samples than features), the sample covariance is rank-deficient. Ridge regression adds $\lambda I$ (regularization) to ensure invertibility — equivalent to using the regularized covariance $\hat{\Sigma} + \lambda I \succ 0$.</li>
+          <li className="mt-2"><strong>Sample covariance can be near-singular.</strong> When $n &lt; d$ (fewer samples than features), the sample covariance is rank-deficient. Ridge regression adds λI (regularization) to ensure invertibility — equivalent to using the regularized covariance Σ̂ + λI ≻ 0.</li>
           <li className="mt-2"><strong>Neural network Hessians are indefinite.</strong> The Hessian of a neural network loss is generally indefinite at most points (including saddle points). Only at local minima is the Hessian PSD. This is why second-order optimizers in deep learning must handle indefinite curvature.</li>
         </ul>
       </WarningBlock>

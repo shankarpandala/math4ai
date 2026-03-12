@@ -148,7 +148,7 @@ export default function DerivativesAndRules() {
         statement="For differentiable functions $f, g$ and constant $c$: (1) Linearity: $(cf + g)' = cf' + g'$. (2) Product rule: $(fg)' = f'g + fg'$. (3) Quotient rule: $(f/g)' = (f'g - fg')/g^2$ (where $g \neq 0$). (4) Chain rule: $(f \circ g)'(x) = f'(g(x)) \cdot g'(x)$."
         proof="Product rule: $\lim_{h\to0}\frac{f(x+h)g(x+h)-f(x)g(x)}{h} = \lim_{h\to0}\frac{[f(x+h)-f(x)]g(x+h)+f(x)[g(x+h)-g(x)]}{h}$. As $h\to0$, $g(x+h)\to g(x)$ (by continuity), giving $f'(x)g(x)+f(x)g'(x)$. Chain rule follows similarly from substitution $u = g(x+h) - g(x)$. $\square$"
         corollaries={[
-          'Power rule (special case): $(x^n)\\' = nx^{n-1}$ for any $n \\in \\mathbb{R}$.',
+          'Power rule (special case): $(x^n)^{\\prime} = nx^{n-1}$ for any $n \\in \\mathbb{R}$.',
           "Reciprocal rule: $(1/g)' = -g'/g^2$ (quotient rule with $f=1$).",
         ]}
       />
@@ -159,7 +159,7 @@ export default function DerivativesAndRules() {
         statement="If $f$ is continuous on $[a,b]$ and differentiable on $(a,b)$, then there exists $c \in (a,b)$ with $f'(c) = \frac{f(b)-f(a)}{b-a}$."
         proof="Apply Rolle's Theorem to $g(x) = f(x) - \frac{f(b)-f(a)}{b-a}(x-a)$. Note $g(a) = f(a)$ and $g(b) = f(a)$, so $g(a) = g(b)$. By Rolle's Theorem (which itself follows from EVT), there exists $c$ with $g'(c) = 0$, giving $f'(c) = \frac{f(b)-f(a)}{b-a}$. $\square$"
         corollaries={[
-          'If $f\\' = 0$ on $(a,b)$ then $f$ is constant on $[a,b]$.',
+          'If $f^{\\prime} = 0$ on $(a,b)$ then $f$ is constant on $[a,b]$.',
           "L'Hôpital's rule for $0/0$ and $\\infty/\\infty$ indeterminate forms follows from MVT.",
         ]}
       />

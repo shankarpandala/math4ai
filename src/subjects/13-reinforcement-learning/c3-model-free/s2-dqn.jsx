@@ -294,12 +294,12 @@ export default function DQN() {
       <WarningBlock title="DQN Target Network Lag Introduces Bias">
         <p>
           The target network's periodically-updated frozen copy introduces a systematic bias:
-          the target $r + \gamma \max_{a'} Q_{\theta^-}(s',a')$ is computed with parameters
-          that are $C$ steps behind. This means DQN does not minimize the true Bellman error
-          but an approximation to it. Large $C$ gives more stable targets but higher bias;
-          small $C$ gives lower bias but less stability. Polyak averaging updates the target
-          network continuously as $\theta^- \leftarrow (1-\tau)\theta^- + \tau\theta$ with
-          $\tau \approx 0.005$ — used in DDPG and SAC as a smoother alternative to periodic
+          the target <InlineMath math="r + \gamma \max_{a'} Q_{\theta^-}(s',a')" /> is computed with parameters
+          that are <InlineMath math="C" /> steps behind. This means DQN does not minimize the true Bellman error
+          but an approximation to it. Large <InlineMath math="C" /> gives more stable targets but higher bias;
+          small <InlineMath math="C" /> gives lower bias but less stability. Polyak averaging updates the target
+          network continuously as <InlineMath math="\theta^- \leftarrow (1-\tau)\theta^- + \tau\theta" /> with
+          <InlineMath math="\tau \approx 0.005" /> — used in DDPG and SAC as a smoother alternative to periodic
           hard updates.
         </p>
       </WarningBlock>

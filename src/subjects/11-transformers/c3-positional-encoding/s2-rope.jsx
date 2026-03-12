@@ -231,7 +231,7 @@ export default function RopeAlibi() {
         <ul className="space-y-2 text-sm">
           <li><strong>Apply to Q and K only, not V.</strong> The rotation must be applied to the query and key vectors; applying it to values would break the output representation.</li>
           <li className="mt-2"><strong>Dimension interleaving convention varies.</strong> Llama uses a split-half convention (all even dims then all odd dims); the original RoPE paper interleaves pairs. Mixing conventions causes silent bugs when loading checkpoints.</li>
-          <li className="mt-2"><strong>Context length extension requires $\theta$ rescaling.</strong> Simply using RoPE-trained weights beyond the training length fails catastrophically. Use NTK scaling (multiply base by $(T_{\text{new}}/T_{\text{train}})^{d/(d-2)}$) or YaRN for robust extension.</li>
+          <li className="mt-2"><strong>Context length extension requires <InlineMath math="\theta" /> rescaling.</strong> Simply using RoPE-trained weights beyond the training length fails catastrophically. Use NTK scaling (multiply base by <InlineMath math="(T_{\text{new}}/T_{\text{train}})^{d/(d-2)}" />) or YaRN for robust extension.</li>
         </ul>
       </WarningBlock>
 

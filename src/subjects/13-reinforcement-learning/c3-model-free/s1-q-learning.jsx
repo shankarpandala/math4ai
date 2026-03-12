@@ -336,11 +336,11 @@ export default function QLearning() {
       <WarningBlock title="Maximization Bias in Q-Learning">
         <p>
           The <InlineMath math="\max_{a'} Q(s',a')" /> operator in Q-learning introduces a
-          systematic positive bias. When $Q(s',a')$ estimates are noisy, the maximum of noisy
+          systematic positive bias. When <InlineMath math="Q(s',a')" /> estimates are noisy, the maximum of noisy
           estimates overestimates the true maximum. This causes Q-learning to overestimate
           values, potentially leading to suboptimal policies. Example: in a state with 10 actions
-          all having true $Q=0$ but noisy estimates $Q \sim \mathcal{N}(0, \sigma^2)$, the
-          expected max is $\sigma \sqrt{2\ln 10} > 0$. Double Q-learning (van Hasselt, 2010)
+          all having true <InlineMath math="Q=0" /> but noisy estimates <InlineMath math="Q \sim \mathcal{N}(0, \sigma^2)" />, the
+          expected max is <InlineMath math="\sigma \sqrt{2\ln 10} > 0" />. Double Q-learning (van Hasselt, 2010)
           and Double DQN address this by using separate networks for action selection and
           value estimation.
         </p>

@@ -229,7 +229,7 @@ export default function ProofTechniques() {
         solution={[
           {
             step: 'Analyse the structure',
-            formula: 'P: \\text{``}3n+2\\text{ is odd''} \\quad Q: \\text{``}n\\text{ is odd''}',
+            formula: "P: \\\\text{``}3n+2\\\\text{ is odd''} \\\\quad Q: \\\\text{``}n\\\\text{ is odd''}",
             explanation: 'We need P ⟹ Q. The contrapositive ¬Q ⟹ ¬P is often easier when the conclusion talks about parity.',
           },
           {

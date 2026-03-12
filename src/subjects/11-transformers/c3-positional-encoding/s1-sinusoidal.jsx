@@ -204,7 +204,7 @@ export default function SinusoidalEncoding() {
 
       <WarningBlock title="Limitations of Sinusoidal PE">
         <ul className="space-y-2 text-sm">
-          <li><strong>No extrapolation guarantee.</strong> While the encoding is defined for any position, the model only sees positions up to training length $T_{\text{train}}$. Performance degrades for positions beyond $T_{\text{train}}$ because the model hasn't learned to use those encodings.</li>
+          <li><strong>No extrapolation guarantee.</strong> While the encoding is defined for any position, the model only sees positions up to training length <InlineMath math="T_{\text{train}}" />. Performance degrades for positions beyond <InlineMath math="T_{\text{train}}" /> because the model hasn't learned to use those encodings.</li>
           <li className="mt-2"><strong>Additive vs. rotary.</strong> Sinusoidal PE is added to token embeddings before attention, which means it can interact unexpectedly with token features. RoPE and ALiBi instead modify attention scores directly, giving better length generalization.</li>
           <li className="mt-2"><strong>Not used in modern LLMs.</strong> Virtually no current LLM uses sinusoidal PE. Llama, Mistral, GPT-NeoX, and others use RoPE; PaLM initially used learned absolute PE; ALiBi is used in BLOOM.</li>
         </ul>
