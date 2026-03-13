@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - claude/math-learning-materials-8SzJe
-      - claude/forecasting-learning-app-jxb90
       - main
 
 jobs:
