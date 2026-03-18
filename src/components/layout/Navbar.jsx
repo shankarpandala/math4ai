@@ -99,11 +99,11 @@ export default function Navbar({ onToggleSidebar, sidebarOpen }) {
             href="https://www.pandala.in"
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden sm:flex items-center font-mono text-sm text-gray-500 dark:text-gray-500 hover:opacity-80 transition-opacity select-none"
+            className="flex items-center font-mono text-sm text-gray-500 dark:text-gray-500 hover:opacity-80 transition-opacity select-none"
           >
             ~/<span className="text-[#5ce0d8]">pandala.in</span>
           </a>
-          <span className="hidden sm:inline text-gray-300 dark:text-[#2d3a4d] select-none" aria-hidden="true">|</span>
+          <span className="text-gray-300 dark:text-[#2d3a4d] select-none" aria-hidden="true">|</span>
           <Link
             to="/"
             className="flex items-center gap-1.5 font-bold text-lg tracking-tight select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 rounded"
